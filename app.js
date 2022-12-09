@@ -6,11 +6,14 @@ const errorHandlerMiddleware = require("./middleware/error-handler");
 
 const app = express();
 
+//routes
+const authRouter = require("./routes/auth");
+const jobsRouter = require("./routes/jobs");
+
 app.use(express.json());
 
-app.get("/", (req, res) => {
-  res.send("Jobs api");
-});
+app.use("/api/v1/auth", authRouter);
+app.use("/api/v1/jobs", jobsRouter);
 
 app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleware);
